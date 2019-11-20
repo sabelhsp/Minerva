@@ -65,7 +65,6 @@
                 <p>&copy; <%: DateTime.Now.Year %> - Minerva</p>
             </footer>
         </div>
-
-    </form>
+        </form>
 </body>
 </html>
