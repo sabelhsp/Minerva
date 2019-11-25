@@ -105,7 +105,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EditLearning.aspx" />
     <Content Include="AdminHomePage.aspx" />
+    <Content Include="EditEmployee.aspx" />
+    <Content Include="EditWiki.aspx" />
+    <Content Include="EmployeeDrive.aspx" />
     <Content Include="EmployeeHomePage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Contact.aspx" />
@@ -156,12 +160,21 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="ViewLearning.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="ViewWiki.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditLearning.aspx.cs">
+      <DependentUpon>EditLearning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditLearning.aspx.designer.cs">
+      <DependentUpon>EditLearning.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminHomePage.aspx.cs">
       <DependentUpon>AdminHomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,6 +183,27 @@
       <DependentUpon>AdminHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="EditEmployee.aspx.cs">
+      <DependentUpon>EditEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditEmployee.aspx.designer.cs">
+      <DependentUpon>EditEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditWiki.aspx.cs">
+      <DependentUpon>EditWiki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditWiki.aspx.designer.cs">
+      <DependentUpon>EditWiki.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeDrive.aspx.cs">
+      <DependentUpon>EmployeeDrive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeDrive.aspx.designer.cs">
+      <DependentUpon>EmployeeDrive.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeHomePage.aspx.cs">
       <DependentUpon>EmployeeHomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,12 +251,26 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="ViewLearning.aspx.cs">
+      <DependentUpon>ViewLearning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewLearning.aspx.designer.cs">
+      <DependentUpon>ViewLearning.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewWiki.aspx.cs">
+      <DependentUpon>ViewWiki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewWiki.aspx.designer.cs">
+      <DependentUpon>ViewWiki.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
