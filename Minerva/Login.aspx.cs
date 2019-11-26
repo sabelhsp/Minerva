@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace Minerva
 {
@@ -25,7 +26,7 @@ namespace Minerva
 
             // Check for invalid username.
             // username must not be null and must be between 1 and 15 characters.
-            if ((null == username) || (0 == username.Text.Length) || (username.Text.Length > 15))
+            if ((null == username) || (0 == username.Text.Length) || (username.Text.Length > 18))
             {
                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of username failed.");
                 return false;
@@ -41,7 +42,7 @@ namespace Minerva
 
             try
             {
-                // Consult with your SQL Server administrator for an appropriate connection
+           
                 // string to use to connect to your local SQL Server.
                 conn = new SqlConnection("server=localhost;Integrated Security=SSPI;database=pubs");
                 conn.Open();
@@ -78,6 +79,7 @@ namespace Minerva
 
         protected void Submit_Click(object sender, EventArgs e)
         {
+            if(ValidateUser(username.Text,password.Text))
                 if (user.Value == "employee")
                 {
                     Response.Redirect("~/EmployeeHomePage.aspx");
