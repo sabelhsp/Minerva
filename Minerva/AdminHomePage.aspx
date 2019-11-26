@@ -6,11 +6,11 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
             <li class="breadcrumb-item"><a href="Login.aspx">Login</a></li>
-            <li class="breadcrumb-item active">Admin Homepage</li>
+            <li class="breadcrumb-item active">Administrator Homepage</li>
         </ol>
     </nav>
 
-    <h1>Welcome to Minerva - Admin</h1>
+    <h1>Welcome to Minerva - Administrator</h1>
 
     <div class="row">
         <a href="EditEmployee.aspx">
