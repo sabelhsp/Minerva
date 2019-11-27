@@ -44,7 +44,7 @@ namespace Minerva
             {
            
                 // string to use to connect to your local SQL Server.
-                conn = new SqlConnection("server=localhost;Integrated Security=SSPI;database=pubs");
+                conn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
                 conn.Open();
 
                 // Create SqlCommand to select pwd field from users table given supplied username.
