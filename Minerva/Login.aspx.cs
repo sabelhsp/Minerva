@@ -13,6 +13,10 @@ namespace Minerva
 {
     public partial class About : Page
     {
+        bool adminRights;
+        private string passwordLogin;
+        private int userIdLogin;
+        HttpCookie cookieName = new HttpCookie("UserName");
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -20,44 +24,58 @@ namespace Minerva
 
         private bool ValidateUser(string uName, string pWord)
         {
-            SqlConnection conn;
+            SqlConnection cnn;
             SqlCommand cmd;
+            SqlDataReader dataReader;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            string commandText;
             string lookupPassword = null;
 
             // Check for invalid username.
             // username must not be null and must be between 1 and 15 characters.
-            if ((null == username) || (0 == username.Text.Length) || (username.Text.Length > 18))
+            if ((null == username) || (0 == uName.Length) || (uName.Length > 18))
             {
                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of username failed.");
                 return false;
             }
 
-            // Check for invalid passWord.
+            // Check for invalid password.
             // passWord must not be null and must be between 1 and 25 characters.
-            if ((null == password) || (0 == password.Text.Length) || (password.Text.Length > 25))
+            if ((null == password) || (0 == pWord.Length) || (pWord.Length > 25))
             {
-                System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of passWord failed.");
+                System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of password failed.");
                 return false;
             }
-
+            userIdLogin = Convert.ToInt32(uName);
+            passwordLogin = pWord;
+            commandText = "SELECT * FROM UserInfo WHERE UserId=" + userIdLogin;
             try
             {
            
                 // string to use to connect to your local SQL Server.
-                conn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
-                conn.Open();
+                cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
+                cnn.Open();
 
-                // Create SqlCommand to select pwd field from users table given supplied username.
-                cmd = new SqlCommand("Select pwd from users where uname=@username", conn);
-                cmd.Parameters.Add("@username", SqlDbType.VarChar, 25);
-                cmd.Parameters["@username"].Value = username;
-
-                // Execute command and fetch pwd field into lookupPassword string.
-                lookupPassword = (string)cmd.ExecuteScalar();
+                //create SQL command and set data reader to save name for user.
+                cmd = new SqlCommand(commandText, cnn);
+                dataReader = cmd.ExecuteReader();
+                //While data reader is open we wwant it to pull back some user information.
+                while (dataReader.Read())
+                {
+                    lookupPassword = Convert.ToString(dataReader.GetValue(5));
+                    lookupPassword = lookupPassword.TrimEnd();
+                    adminRights = Convert.ToBoolean(dataReader.GetValue(9));
+                    string tempFirstName = Convert.ToString(dataReader.GetValue(1));
+                    string tempLastName = Convert.ToString(dataReader.GetValue(2));
+                    tempFirstName = tempFirstName.TrimEnd();
+                    tempLastName = tempLastName.TrimEnd();
+                    cookieName.Value = tempFirstName + " " + tempLastName;
+                }
 
                 // Cleanup command and connection objects.
                 cmd.Dispose();
-                conn.Dispose();
+                cnn.Dispose();
+                cnn.Close();
             }
             catch (Exception ex)
             {
@@ -74,20 +92,26 @@ namespace Minerva
             }
 
             // Compare lookupPassword and input passWord, using a case-sensitive comparison.
-            return (0 == string.Compare(lookupPassword, password.Text, false));
+            return (0 == string.Compare(lookupPassword, pWord, false));
         }
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            if(ValidateUser(username.Text,password.Text))
+
+            if (ValidateUser(username.Text, password.Text))
+            {
                 if (user.Value == "employee")
                 {
                     Response.Redirect("~/EmployeeHomePage.aspx");
                 }
-                else if (user.Value == "admin")
+                else if (user.Value == "admin" && adminRights == true)
                 {
                     Response.Redirect("~/AdminHomePage.aspx");
                 }
+            }else
+            {
+                labelLoginError.Text = "Login Failed. Please check your inputs and try again.";
+            }
         }
     }
 }
