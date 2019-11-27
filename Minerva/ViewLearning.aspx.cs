@@ -11,6 +11,10 @@ namespace Minerva
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.Cookies["UserName"].Value == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
 
         }
     }

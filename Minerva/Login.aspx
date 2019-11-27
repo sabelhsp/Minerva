@@ -32,6 +32,7 @@
             <option value="admin">Admin</option>
         </select>
     </div>
+    <asp:Label ID="labelLoginError" runat="server"></asp:Label>
     <br />
     <div>
         <asp:Button runat="server" type="submit" Text="Submit" OnClick="Submit_Click"></asp:Button>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI;
 using System.Data.SqlClient;
 
 namespace Minerva
@@ -9,6 +10,10 @@ namespace Minerva
         protected void Page_Load(object sender, EventArgs e)
         {
             
+            if (Request.Cookies["UserName"].Value == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void RadioButtonListEdit_SelectedIndexChanged(object sender, EventArgs e)
