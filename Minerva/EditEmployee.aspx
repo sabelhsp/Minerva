@@ -13,9 +13,9 @@
     <nav>
          <h2>What would you like to do?</h2><h4>
         <asp:RadioButtonList AutoPostBack="true" Width="25%" runat="server" ID="RadioButtonListEdit" RepeatDirection="Horizontal" OnSelectedIndexChanged="RadioButtonListEdit_SelectedIndexChanged" >
-            <asp:ListItem Selected="True" Text="Add" Value="1"></asp:ListItem>
-            <asp:ListItem Text="Edit" Value="2"></asp:ListItem>
-            <asp:ListItem Text="Delete" Value="3"></asp:ListItem>
+            <asp:ListItem Selected="True" Text="Add" Value="add"></asp:ListItem>
+            <asp:ListItem Text="Edit" Value="edit"></asp:ListItem>
+            <asp:ListItem Text="Delete" Value="delete"></asp:ListItem>
         </asp:RadioButtonList></h4>
     </nav>
 
@@ -44,15 +44,15 @@
         <asp:TextBox ID="textBoxSSN" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="labelDOB" runat="server" Text="Date of Birth:"></asp:Label>
-        <asp:TextBox ID="textBoxDOB" runat="server" TextMode="Date"></asp:TextBox>
+        <asp:TextBox ID="textBoxDOB" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="labelAddress" runat="server" Text="Address:"></asp:Label>
-        <asp:TextBox ID="textBoxAddress" runat="server" style="margin-top: 21"></asp:TextBox>
+        <asp:TextBox ID="textBoxAddress" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="labelAdminRights" runat="server" Text="Admin Privileges?"></asp:Label>
         <asp:CheckBox ID="checkBoxAdmin" runat="server" Text="Yes" />
         <br />
-        <asp:Button ID="btnSubmitEditEmployee" runat="server" Text="Submit" />
+        <asp:Button ID="btnSubmitEditEmployee" runat="server" Text="Submit" OnClick="btnSubmitEditEmployee_Click" />
         <asp:Label ID="labelUserExists" runat="server"></asp:Label>
     </nav>
 </asp:Content>
