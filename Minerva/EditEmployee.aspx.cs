@@ -25,6 +25,7 @@ namespace Minerva
 
         protected void RadioButtonListEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             //show form will be true until the form needs to be hidden
             if (RadioButtonListEdit.SelectedValue == "edit")
             {
@@ -68,6 +69,8 @@ namespace Minerva
 
         protected void btnUserIdSearch_Click(object sender, EventArgs e)
         {
+            ClearTextFields();
+            labelUserExists.Text = "";
             int userIdSearch = Convert.ToInt32(textBoxUserId.Text);
             string output = "";
             SqlDataReader dataReader;
@@ -115,6 +118,7 @@ namespace Minerva
                 textBoxDOB.Visible = showForm;
                 textBoxAddress.Visible = showForm;
                 checkBoxAdmin.Visible = showForm;
+                btnSubmitEditEmployee.Visible = showForm;
                 if (RadioButtonListEdit.SelectedValue == "add")
                 {
                     btnSubmitEditEmployee.Visible = !showForm;
@@ -134,6 +138,7 @@ namespace Minerva
 
         protected void btnSubmitEditEmployee_Click(object sender, EventArgs e)
         {
+            labelFoundUser.Text = "";
             int userId = Convert.ToInt32(textBoxUserId.Text);
             string firstName = Convert.ToString(textBoxFirstName.Text);
             string lastName = Convert.ToString(textBoxLastName.Text);
@@ -152,30 +157,53 @@ namespace Minerva
                 cnn = new SqlConnection(connectionString);
                 cnn.Open();
                 command = new SqlCommand(commandText, cnn);
-                int numRow = command.ExecuteNonQuery();
+                int numRowAdd = command.ExecuteNonQuery();
                 command.Dispose();
                 cnn.Close();
-                labelUserExists.Text = "User has been added successfully. " +numRow+ " number of rows affected.";
+                labelUserExists.Text = "User has been added successfully. " +numRowAdd+ " number of rows affected.";
+                ClearTextFields();
             }
             if (RadioButtonListEdit.SelectedValue == "edit")
             {
-                string commandText = "SELECT * FROM UserInfo WHERE UserId=" + userId;
+                string commandText = @"UPDATE UserInfo " +
+                    "SET FirstName = '"+firstName+"', LastName = '"+lastName+"', Email = '"+email+"', Phone = '"+phoneNum
+                    +"', Password = '"+password+"', SSN = "+sSN+", DOB = '"+dOB+"', Address = '"+address+"', Admin = "+adminRights+
+                    " WHERE UserId = "+userId+";";
                 cnn = new SqlConnection(connectionString);
                 cnn.Open();
                 command = new SqlCommand(commandText, cnn);
+                int numRowEdit = command.ExecuteNonQuery();
                 command.Dispose();
                 cnn.Close();
+                labelUserExists.Text = "User has been edited successfully. " + numRowEdit + " number of rows affected.";
             }
             if (RadioButtonListEdit.SelectedValue == "delete")
             {
-                string commandText = "SELECT * FROM UserInfo WHERE UserId=" + userId;
+                string commandText = @"DELETE FROM UserInfo WHERE UserId = " + userId+";";
                 cnn = new SqlConnection(connectionString);
                 cnn.Open();
                 command = new SqlCommand(commandText, cnn);
+                int numRowDelete = command.ExecuteNonQuery();
                 command.Dispose();
                 cnn.Close();
+                labelUserExists.Text = "User has been deleted successfully. " + numRowDelete + " number of rows affected.";
+                ClearTextFields();
             }
 
+        }
+
+        public void ClearTextFields()
+        {
+            textBoxUserId.Text = "";
+            textBoxFirstName.Text = "";
+            textBoxLastName.Text = "";
+            textBoxEmail.Text = "";
+            textBoxPhone.Text = "";
+            textBoxEditPassword.Text = "";
+            textBoxSSN.Text = "";
+            textBoxDOB.Text = "";
+            textBoxAddress.Text = "";
+            checkBoxAdmin.Checked = false;
         }
     }
 }

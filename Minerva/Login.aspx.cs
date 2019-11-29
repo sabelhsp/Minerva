@@ -106,10 +106,14 @@ namespace Minerva
                     Response.Cookies.Add(cookieName);
                     Response.Redirect("~/EmployeeHomePage.aspx");
                 }
-                else if (user.Value == "admin" && adminRights == true && cookieName != null)
+                if (user.Value == "admin" && adminRights == true && cookieName != null)
                 {
                     Response.Cookies.Add(cookieName);
                     Response.Redirect("~/AdminHomePage.aspx");
+                }
+                if (user.Value == "admin" && adminRights == false)
+                {
+                    labelLoginError.Text = "Login Failed. You do not have access to admin page.";
                 }
             }else
             {
