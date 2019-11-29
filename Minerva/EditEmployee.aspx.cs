@@ -12,6 +12,8 @@ namespace Minerva
         SqlCommand command;
         string connectionString = @"Server=LAPTOP-LKVILIHC\MSSQLSERVER01;Database=Minerva;Trusted_Connection=True";
         private bool showForm = true;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             HttpCookie cookieName = new HttpCookie("UserName");
@@ -25,25 +27,27 @@ namespace Minerva
 
         protected void RadioButtonListEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             //show form will be true until the form needs to be hidden
             if (RadioButtonListEdit.SelectedValue == "edit")
             {
                 showForm = false;
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
+                ClearTextFields();
             }
             else if(RadioButtonListEdit.SelectedValue == "delete")
             {
                 showForm = false;
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
+                ClearTextFields();
             }
             else
             {
                 showForm = true;
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
+                ClearTextFields();
             }
             //User Search Button will always be visible so that you can confirm a UserID does or deos not exist
             labelFirstName.Visible = showForm;
@@ -69,9 +73,8 @@ namespace Minerva
 
         protected void btnUserIdSearch_Click(object sender, EventArgs e)
         {
-            ClearTextFields();
             labelUserExists.Text = "";
-            int userIdSearch = Convert.ToInt32(textBoxUserId.Text);
+            int userIdSearch = Convert.ToInt32(textBoxUserId.Text.TrimStart(new char[] { '0' }));
             string output = "";
             SqlDataReader dataReader;
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -82,14 +85,14 @@ namespace Minerva
             dataReader = command.ExecuteReader();
             while (dataReader.Read()) {
                 output = "Found User";
-                textBoxFirstName.Text = Convert.ToString(dataReader.GetValue(1));
-                textBoxLastName.Text = Convert.ToString(dataReader.GetValue(2));
-                textBoxEmail.Text = Convert.ToString(dataReader.GetValue(3));
-                textBoxPhone.Text = Convert.ToString(dataReader.GetValue(4));
-                textBoxEditPassword.Text = Convert.ToString(dataReader.GetValue(5));
-                textBoxSSN.Text = Convert.ToString(dataReader.GetValue(6));
-                textBoxDOB.Text = Convert.ToString(dataReader.GetValue(7));
-                textBoxAddress.Text = Convert.ToString(dataReader.GetValue(8));
+                textBoxFirstName.Text = Convert.ToString(dataReader.GetValue(1)).TrimEnd();
+                textBoxLastName.Text = Convert.ToString(dataReader.GetValue(2)).TrimEnd();
+                textBoxEmail.Text = Convert.ToString(dataReader.GetValue(3)).TrimEnd();
+                textBoxPhone.Text = Convert.ToString(dataReader.GetValue(4)).TrimEnd();
+                textBoxEditPassword.Text = Convert.ToString(dataReader.GetValue(5)).TrimEnd();
+                textBoxSSN.Text = Convert.ToString(dataReader.GetValue(6)).TrimEnd();
+                textBoxDOB.Text = Convert.ToString(dataReader.GetValue(7)).TrimEnd();
+                textBoxAddress.Text = Convert.ToString(dataReader.GetValue(8)).TrimEnd();
                 checkBoxAdmin.Checked = Convert.ToBoolean(dataReader.GetValue(9));
                 
             }
@@ -138,17 +141,17 @@ namespace Minerva
 
         protected void btnSubmitEditEmployee_Click(object sender, EventArgs e)
         {
-            labelFoundUser.Text = "";
-            int userId = Convert.ToInt32(textBoxUserId.Text);
-            string firstName = Convert.ToString(textBoxFirstName.Text);
-            string lastName = Convert.ToString(textBoxLastName.Text);
-            string email = Convert.ToString(textBoxEmail.Text);
-            string phoneNum = Convert.ToString(textBoxPhone.Text);
-            string password = Convert.ToString(textBoxEditPassword.Text);
-            int sSN = Convert.ToInt32(textBoxSSN.Text);
-            string dOB = Convert.ToString(textBoxDOB.Text);
-            string address = Convert.ToString(textBoxAddress.Text);
+            int userId = Convert.ToInt32(textBoxUserId.Text.TrimStart(new char[] { '0' }));
+            string firstName = Convert.ToString(textBoxFirstName.Text).TrimEnd();
+            string lastName = Convert.ToString(textBoxLastName.Text).TrimEnd();
+            string email = Convert.ToString(textBoxEmail.Text).TrimEnd();
+            string phoneNum = Convert.ToString(textBoxPhone.Text).TrimEnd();
+            string password = Convert.ToString(textBoxEditPassword.Text).TrimEnd();
+            int sSN = Convert.ToInt32(textBoxSSN.Text.TrimStart(new char[] { '0' }));
+            string dOB = Convert.ToString(textBoxDOB.Text).TrimEnd();
+            string address = Convert.ToString(textBoxAddress.Text).TrimEnd();
             int adminRights = Convert.ToInt32(checkBoxAdmin.Checked);
+            labelFoundUser.Text = "";
             if (RadioButtonListEdit.SelectedValue == "add")
             {         
                 string commandText = @"Insert Into UserInfo (UserId,FirstName,LastName,Email,Phone,Password,SSN,DOB,Address,Admin) Values ("
