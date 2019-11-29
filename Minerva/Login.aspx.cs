@@ -70,6 +70,7 @@ namespace Minerva
                     tempFirstName = tempFirstName.TrimEnd();
                     tempLastName = tempLastName.TrimEnd();
                     cookieName.Value = tempFirstName + " " + tempLastName;
+                    cookieName.Expires = DateTime.Now.AddHours(1);
                 }
 
                 // Cleanup command and connection objects.
@@ -100,12 +101,14 @@ namespace Minerva
 
             if (ValidateUser(username.Text, password.Text))
             {
-                if (user.Value == "employee")
+                if (user.Value == "employee" && cookieName != null)
                 {
+                    Response.Cookies.Add(cookieName);
                     Response.Redirect("~/EmployeeHomePage.aspx");
                 }
-                else if (user.Value == "admin" && adminRights == true)
+                else if (user.Value == "admin" && adminRights == true && cookieName != null)
                 {
+                    Response.Cookies.Add(cookieName);
                     Response.Redirect("~/AdminHomePage.aspx");
                 }
             }else
