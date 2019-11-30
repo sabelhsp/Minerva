@@ -14,6 +14,10 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.syncfusion.com/17.3.0.14/js/web/flat-azure/ej.web.all.min.css" rel="stylesheet" />
+    <link href="17.3.0.14/themes/web/content/default.css" rel="stylesheet" />
+    <link href="17.3.0.14/themes/web/content/default-responsive.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -34,6 +38,10 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
+                <asp:ScriptReference Path="//cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js" > </asp:ScriptReference>	
+                <asp:ScriptReference Path="//cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js" ></asp:ScriptReference>
+                <asp:ScriptReference Path="//cdn.syncfusion.com/js/assets/external/jsrender.min.js"></asp:ScriptReference>
+                <asp:ScriptReference Path="//cdn.syncfusion.com/17.3.0.14/js/web/ej.web.all.min.js "></asp:ScriptReference>
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
