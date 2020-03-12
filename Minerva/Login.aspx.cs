@@ -17,6 +17,7 @@ namespace Minerva
         private string passwordLogin;
         private int userIdLogin;
         HttpCookie cookieName = new HttpCookie("UserName");
+        HttpCookie cookieId = new HttpCookie("UserId");
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -70,7 +71,9 @@ namespace Minerva
                     tempFirstName = tempFirstName.TrimEnd();
                     tempLastName = tempLastName.TrimEnd();
                     cookieName.Value = tempFirstName + " " + tempLastName;
+                    cookieId.Value = uName;
                     cookieName.Expires = DateTime.Now.AddHours(1);
+                    cookieId.Expires = DateTime.Now.AddHours(1);
                 }
 
                 // Cleanup command and connection objects.
@@ -104,11 +107,13 @@ namespace Minerva
                 if (user.Value == "employee" && cookieName != null)
                 {
                     Response.Cookies.Add(cookieName);
+                    Response.Cookies.Add(cookieId);
                     Response.Redirect("~/EmployeeHomePage.aspx");
                 }
                 if (user.Value == "admin" && adminRights == true && cookieName != null)
                 {
                     Response.Cookies.Add(cookieName);
+                    Response.Cookies.Add(cookieId);
                     Response.Redirect("~/AdminHomePage.aspx");
                 }
                 if (user.Value == "admin" && adminRights == false)

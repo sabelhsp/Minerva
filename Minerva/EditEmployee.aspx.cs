@@ -7,7 +7,7 @@ namespace Minerva
 {
     public partial class EditEmployee : System.Web.UI.Page
     {
-
+        int operatorId;
         SqlConnection cnn;
         SqlCommand command;
         string connectionString = @"Server=LAPTOP-LKVILIHC\MSSQLSERVER01;Database=Minerva;Trusted_Connection=True";
@@ -23,6 +23,10 @@ namespace Minerva
             {
                 Response.Redirect("Login.aspx");
             }
+            HttpCookie cookieId = new HttpCookie("UserId");
+            cookieId = Request.Cookies["UserId"];
+            operatorId = Convert.ToInt32(cookieId.Value);
+            
         }
 
         protected void RadioButtonListEdit_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,6 +130,7 @@ namespace Minerva
                 {
                     btnSubmitEditEmployee.Visible = !showForm;
                     labelUserExists.Text = "This UserId already exists please use another Id# if you intend to add a new employee.";
+                    ClearTextFields();
                 }
                 else
                 {
@@ -154,9 +159,9 @@ namespace Minerva
             labelFoundUser.Text = "";
             if (RadioButtonListEdit.SelectedValue == "add")
             {         
-                string commandText = @"Insert Into UserInfo (UserId,FirstName,LastName,Email,Phone,Password,SSN,DOB,Address,Admin) Values ("
+                string commandText = @"Insert Into UserInfo (UserId,FirstName,LastName,Email,Phone,Password,SSN,DOB,Address,isAdmin,AdminId) Values ("
                     +userId+",'" + firstName + "','" + lastName + "','" + email + "','" + phoneNum + "','" + password + "'," + sSN + ",'"
-                    + dOB + "','" + address + "'," + adminRights + ");";
+                    + dOB + "','" + address + "'," + adminRights+ "," + operatorId+ ");";
                 cnn = new SqlConnection(connectionString);
                 cnn.Open();
                 command = new SqlCommand(commandText, cnn);
@@ -165,12 +170,23 @@ namespace Minerva
                 cnn.Close();
                 labelUserExists.Text = "User has been added successfully. " +numRowAdd+ " number of rows affected.";
                 ClearTextFields();
+                if (Convert.ToBoolean(adminRights))
+                {
+                    commandText = @"Insert Into Admin (AdminId, FirstName, LastName, Email, admin) Values (" +
+                        userId + ", '" + firstName + "', '" + lastName + "', '" + email + "', " + adminRights + ");";
+                    cnn = new SqlConnection(connectionString);
+                    cnn.Open();
+                    command = new SqlCommand(commandText, cnn);
+                    command.ExecuteNonQuery();
+                    command.Dispose();
+                    cnn.Close();
+                }
             }
             if (RadioButtonListEdit.SelectedValue == "edit")
             {
                 string commandText = @"UPDATE UserInfo " +
                     "SET FirstName = '"+firstName+"', LastName = '"+lastName+"', Email = '"+email+"', Phone = '"+phoneNum
-                    +"', Password = '"+password+"', SSN = "+sSN+", DOB = '"+dOB+"', Address = '"+address+"', Admin = "+adminRights+
+                    +"', Password = '"+password+"', SSN = "+sSN+", DOB = '"+dOB+"', Address = '"+address+"', isAdmin = "+adminRights+", AdminId = "+operatorId+
                     " WHERE UserId = "+userId+";";
                 cnn = new SqlConnection(connectionString);
                 cnn.Open();
@@ -179,6 +195,18 @@ namespace Minerva
                 command.Dispose();
                 cnn.Close();
                 labelUserExists.Text = "User has been edited successfully. " + numRowEdit + " number of rows affected.";
+
+                if (Convert.ToBoolean(adminRights))
+                {
+                    commandText = @"UPDATE Admin SET AdminId = " + userId + ", FirstName = '" + firstName + "', LastName = '" + lastName + "', Email = '" + email +
+                        "', admin = " + adminRights + " WHERE AdminId = "+userId+";";
+                    cnn = new SqlConnection(connectionString);
+                    cnn.Open();
+                    command = new SqlCommand(commandText, cnn);
+                    command.ExecuteNonQuery();
+                    command.Dispose();
+                    cnn.Close();
+                }
             }
             if (RadioButtonListEdit.SelectedValue == "delete")
             {
@@ -192,6 +220,7 @@ namespace Minerva
                 labelUserExists.Text = "User has been deleted successfully. " + numRowDelete + " number of rows affected.";
                 ClearTextFields();
             }
+
 
         }
 
