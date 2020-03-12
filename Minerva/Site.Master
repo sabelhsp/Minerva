@@ -20,6 +20,7 @@
     <link href="17.3.0.14/themes/web/content/default-responsive.css" rel="stylesheet" />
 
 </head>
+
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
@@ -46,7 +47,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" runat="server" href="~/">Minerva</a>
@@ -56,9 +57,12 @@
                         <li><a runat="server" href="~/Login">Login</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
+                    <span class="navbar-text navbar-right">
+                        <asp:Label ID="labelWelcome" runat="server" Text='Welcome'></asp:Label>
+                    </span>
                 </div>
             </div>
-        </div>
+        </nav>
         
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

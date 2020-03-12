@@ -12,7 +12,7 @@
     </nav>
     <nav>
          <h2>What would you like to do?</h2><h4>
-        <asp:RadioButtonList AutoPostBack="true" Width="25%" runat="server" ID="RadioButtonListEdit" RepeatDirection="Horizontal" OnSelectedIndexChanged="RadioButtonListEdit_SelectedIndexChanged" >
+        <asp:RadioButtonList AutoPostBack="true" runat="server" ID="RadioButtonListEdit" Width="25%" RepeatDirection="Horizontal" OnSelectedIndexChanged="RadioButtonListEdit_SelectedIndexChanged" >
             <asp:ListItem Selected="True" Text="Add" Value="add"></asp:ListItem>
             <asp:ListItem Text="Edit" Value="edit"></asp:ListItem>
             <asp:ListItem Text="Delete" Value="delete"></asp:ListItem>

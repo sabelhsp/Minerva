@@ -11,4 +11,16 @@
         </ol>
     </nav>
 
+    <h4>Hold CTRL + left click to select multiple courses/employees</h4>
+
+    <div class="col-sm-6">
+        <asp:ListBox runat="server" ID="listCourses" SelectionMode="Multiple"></asp:ListBox>
+    </div>
+    <div class="col-sm-6">
+        <asp:ListBox runat="server" ID="listUsers" SelectionMode="Multiple"></asp:ListBox>
+    </div>
+
+    <asp:Button runat="server" ID="btnAddCourses" Text="Add Courses" class="btn btn-success" OnClick="btnAddCourses_Click" />
+    <asp:Label runat="server" ID="testTxt"></asp:Label>
+
 </asp:Content>
