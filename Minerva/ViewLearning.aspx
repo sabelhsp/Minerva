@@ -12,15 +12,29 @@
     </nav>
 
     <h1>View Your Learning Assignments</h1>
-
     <h3 class ="container">Assigned Learning</h3>
     <div class ="container">
-    <asp:GridView ID="gridAssigned" runat="server"></asp:GridView>
-    </div>
+    <asp:GridView ID="gridAssigned" runat="server" AutoGenerateColumns="false">
+        <Columns>
+            <asp:HyperLinkField DataTextField="CourseName" DataNavigateUrlFields="CourseLink" HeaderText="Name"  />
+            <asp:BoundField DataField="CourseDesc" HeaderText="Description" />
+            <asp:BoundField DataField="CourseDuration" HeaderText="Duration" />
+            <asp:BoundField DataField="DateDue" HeaderText="Date Due" />
+        </Columns>
 
+    </asp:GridView>
+    </div>
     <h3 class ="container">Completed Learning</h3>
     <div class="container">
-    <asp:GridView ID="gridCompleted" runat="server"></asp:GridView>
+    <asp:GridView ID="gridCompleted" runat="server" AutoGenerateColumns="false">
+        <Columns>
+            <asp:BoundField DataField="CourseName" HeaderText="Name" />
+            <asp:BoundField DataField="CourseDesc" HeaderText="Description" />
+            <asp:BoundField DataField="CourseDuration" HeaderText="Duration" />
+            <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned" />
+        </Columns>
+
+    </asp:GridView>
     </div>
 
 </asp:Content>

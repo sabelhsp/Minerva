@@ -42,7 +42,7 @@ namespace Minerva
             
             try
             {
-                cmdText = "Select LearningAssignment.DateDue, LearningCourse.CourseName, LearningCourse.CourseDesc, LearningCourse.CourseDuration From LearningAssignment " +
+                cmdText = "Select LearningCourse.CourseName, LearningCourse.CourseLink, LearningCourse.CourseDesc, LearningCourse.CourseDuration, LearningAssignment.DateDue From LearningAssignment " +
                     "Right Join LearningCourse On LearningAssignment.CourseId = LearningCourse.CourseId WHERE UserId = " + userId + " AND Completed = 0;";
                 // string to use to connect to your local SQL Server.
                 cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
@@ -61,7 +61,7 @@ namespace Minerva
                 cnn.Dispose();
                 cnn.Close();
 
-                commandText = "Select LearningAssignment.DateDue, LearningCourse.CourseName, LearningCourse.CourseDesc, LearningCourse.CourseDuration From LearningAssignment " +
+                commandText = "Select LearningCourse.CourseName, LearningCourse.CourseDesc, LearningCourse.CourseDuration, LearningAssignment.DateAssigned From LearningAssignment " +
                     "Right Join LearningCourse On LearningAssignment.CourseId = LearningCourse.CourseId WHERE UserId = "+userId+" AND Completed = 1;";
                 // string to use to connect to your local SQL Server.
                 connection = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
