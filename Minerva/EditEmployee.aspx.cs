@@ -181,6 +181,8 @@ namespace Minerva
                     command.Dispose();
                     cnn.Close();
                 }
+                System.IO.Directory.CreateDirectory("C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\" + firstName+" "+lastName);
+
             }
             if (RadioButtonListEdit.SelectedValue == "edit")
             {

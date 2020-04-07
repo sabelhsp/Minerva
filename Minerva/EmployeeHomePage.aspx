@@ -4,8 +4,6 @@
 
     <nav aria-label="breadcrumb" >
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="Default.aspx">Home</a></li>
-            <li class="breadcrumb-item"><a href="Login.aspx">Login</a></li>
             <li class="breadcrumb-item active">Employee Homepage</li>
         </ol>
     </nav>

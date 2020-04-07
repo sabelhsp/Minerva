@@ -16,26 +16,20 @@
     </p>
 
 
-    <div>
+    <div class="form-group">
         <asp:Label runat="server" for="username">Username:</asp:Label>
-        <asp:TextBox runat="server" type="text" name="username" ID="username"></asp:TextBox>
-    </div>
-
-    <div>
+        <asp:TextBox runat="server" type="text" name="username" ID="username" CssClass="form-control"></asp:TextBox>
+        <br />
         <asp:Label Width="68px" runat="server" for="password">Password:</asp:Label>
-        <asp:TextBox runat="server" type="password" name="password" ID="password"></asp:TextBox>
-    </div>
-    <br />
-    <div>
-        <select runat="server" id="user" name="User">
+        <asp:TextBox runat="server" type="password" name="password" ID="password" CssClass="form-control"></asp:TextBox>
+        <br />
+        <select runat="server" id="user" name="User" class="form-control">
             <option value="employee">Employee</option>
             <option value="admin">Admin</option>
         </select>
-    </div>
-    <asp:Label ID="labelLoginError" runat="server"></asp:Label>
-    <br />
-    <div>
-        <asp:Button runat="server" type="submit" Text="Submit" OnClick="Submit_Click"></asp:Button>
+        <asp:Label ID="labelLoginError" runat="server"></asp:Label>
+        <br />
+        <asp:Button runat="server" type="submit" Text="Submit" OnClick="Submit_Click" CssClass="btn btn-success"></asp:Button>
     </div>
 
 </asp:Content>

@@ -47,12 +47,13 @@ namespace Minerva
         
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            ClearResults();
             List<int> wikiIds = new List<int>();
             SqlConnection cnn;
             SqlCommand cmd;
             string cmdText;
             SqlDataAdapter adapter = new SqlDataAdapter();
-            if (txtTitle.Text!=null)
+            if (txtTitle.Text!="")
             {
                 cmdText = "Select WikiId from WikiPage where Title like '%"+txtTitle.Text+"%';";
                 cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
@@ -67,9 +68,9 @@ namespace Minerva
                 cnn.Dispose();
                 cnn.Close();
             }
-            if (txtDesc.Text!=null)
+            if (txtDesc.Text!="")
             {
-                cmdText = "Select WikiId from WikiPage where Title like '%" + txtDesc.Text + "%'";
+                cmdText = "Select WikiId from WikiPage where Description like '%" + txtDesc.Text + "%'";
                 cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
                 cnn.Open();
                 cmd = new SqlCommand(cmdText, cnn);
@@ -84,9 +85,9 @@ namespace Minerva
             }
             for (int i = 0; i < ddlTags.Items.Count; i++)
             {
-                if (ddlTags.Items[i].Value != null)
+                if (ddlTags.Items[i].Selected)
                 {
-                    cmdText = "Select WikiTags.WikiId from WikiTags join Tags on WikiTags.TagId = Tags.TagId Where Tags.TagName = '"+ddlTags.Items[i].Value+"'; ";
+                    cmdText = "Select WikiTags.WikiId from WikiTags join Tags on WikiTags.TagId = Tags.TagId Where Tags.TagName = '"+ddlTags.Items[i].Value.TrimEnd()+"'; ";
                     cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
                     cnn.Open();
                     cmd = new SqlCommand(cmdText, cnn);
@@ -103,23 +104,33 @@ namespace Minerva
 
             wikiIds = wikiIds.Distinct().ToList();
 
-            cmdText = "Select Title From WikiPage Where WikiId = "+wikiIds[0];
-            for (int i = 1; i < wikiIds.Count; i++)
+            if (wikiIds.Count > 0)
             {
-                cmdText = cmdText + " or WikiId = " + wikiIds[i];
+                cmdText = "Select Title From WikiPage Where WikiId = " + wikiIds[0];
+                for (int i = 1; i < wikiIds.Count; i++)
+                {
+                    cmdText = cmdText + " or WikiId = " + wikiIds[i];
+                }
+                cmdText = cmdText + ";";
+                cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
+                cnn.Open();
+                cmd = new SqlCommand(cmdText, cnn);
+                SqlDataReader data = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (data.Read())
+                {
+                    listPages.Items.Add(Convert.ToString(data.GetValue(0)));
+                }
+                cmd.Dispose();
+                cnn.Dispose();
+                cnn.Close();
             }
-            cmdText = cmdText + ";";
-            cnn = new SqlConnection(@"server=LAPTOP-LKVILIHC\MSSQLSERVER01;Trusted_Connection=True;database=Minerva");
-            cnn.Open();
-            cmd = new SqlCommand(cmdText, cnn);
-            SqlDataReader data = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            while (data.Read())
+            else
             {
-                listPages.Items.Add(Convert.ToString(data.GetValue(0)));
+                lblTest.Visible = true;
             }
-            cmd.Dispose();
-            cnn.Dispose();
-            cnn.Close();
+
+            
+            
         }
 
         protected void ddlTags_PreRender(object sender, EventArgs e)
@@ -133,6 +144,11 @@ namespace Minerva
             txtDesc.Text = "";
             txtTitle.Text = "";
             FillTags();
+        }
+        private void ClearResults()
+        {
+            listPages.Items.Clear();
+            lblTest.Visible = false;
         }
 
         string link;
@@ -162,6 +178,7 @@ namespace Minerva
         protected void btnClear_Click(object sender, EventArgs e)
         {
             ClearSearch();
+            ClearResults();
         }
     }
 }
