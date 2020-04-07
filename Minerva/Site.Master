@@ -49,8 +49,10 @@
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" runat="server" href="~/">Minerva</a>
+                <div class="navbar-header top">
+                    <a class="navbar-brand" runat="server" href="~/">
+                        <asp:Image runat="server" ImageUrl="~/Minerva.png" Width="45" ImageAlign="Top" />
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

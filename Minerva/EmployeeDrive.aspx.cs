@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace Minerva
 {
     public partial class EmployeeDrive : System.Web.UI.Page
     {
+        string uName;
         protected void Page_Load(object sender, EventArgs e)
         {
             HttpCookie cookieName = new HttpCookie("UserName");
@@ -20,11 +22,11 @@ namespace Minerva
             {
                 Response.Redirect("Login.aspx");
             }
-            if (!this.IsPostBack)
-            {
-                DirectoryInfo rootInfo = new DirectoryInfo(Server.MapPath("~/Vehicles/"));
-                this.PopulateTreeView(rootInfo, null);
-            }
+            TreeView1.Nodes.Clear();
+            DirectoryInfo rootInfo = new DirectoryInfo(Server.MapPath("~/"+cookieName.Value+"/"));
+            this.PopulateTreeView(rootInfo, null);
+            headerDrive.Text = cookieName.Value + "'s Drive";
+            uName = cookieName.Value;
         }
 
         private void PopulateTreeView(DirectoryInfo dirInfo, TreeNode treeNode)
@@ -36,7 +38,7 @@ namespace Minerva
                     Text = directory.Name,
                     Value = directory.FullName
                 };
-
+                
                 if (treeNode == null)
                 {
                     //If Root Node, add to TreeView.
@@ -47,7 +49,7 @@ namespace Minerva
                     //If Child Node, add to Parent Node.
                     treeNode.ChildNodes.Add(directoryNode);
                 }
-
+                
                 //Get all files in the Directory.
                 foreach (FileInfo file in directory.GetFiles())
                 {
@@ -64,6 +66,30 @@ namespace Minerva
 
                 PopulateTreeView(directory, directoryNode);
             }
+        }
+
+        private void OpenFolder(string folderPath)
+        {
+            if (Directory.Exists(folderPath))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = folderPath,
+                    FileName = "explorer.exe"
+                };
+
+                Process.Start(startInfo);
+            }
+            else
+            {
+                
+            }
+        }
+
+        protected void btnAddFiles_Click(object sender, EventArgs e)
+        {
+            OpenFolder("C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\"+uName);
+
         }
     }
 }

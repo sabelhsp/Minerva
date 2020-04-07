@@ -13,6 +13,24 @@ namespace Minerva {
     public partial class EmployeeDrive {
         
         /// <summary>
+        /// headerDrive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label headerDrive;
+        
+        /// <summary>
+        /// btnAddFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddFiles;
+        
+        /// <summary>
         /// TreeView1 control.
         /// </summary>
         /// <remarks>

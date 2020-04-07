@@ -98,6 +98,7 @@ namespace Minerva
                 lblDesc.Visible = true;
                 txtDesc.Visible = true;
                 btnWiki.Text = "Add";
+                btnWiki.CssClass = "btn btn-primary";
                 FillTags();
             }
             if (radioWiki.SelectedValue == "delete")
@@ -109,6 +110,8 @@ namespace Minerva
                 lblDesc.Visible = false;
                 txtDesc.Visible = false;
                 btnWiki.Text = "Delete";
+                btnWiki.CssClass = "btn btn-danger";
+
             }
             ClearWiki();
         }
@@ -118,10 +121,12 @@ namespace Minerva
             if (radioTag.SelectedValue == "add")
             {
                 btnTags.Text = "Add";
+                btnTags.CssClass = "btn btn-primary";
             }
             if (radioTag.SelectedValue == "delete")
             {
                 btnTags.Text = "Delete";
+                btnTags.CssClass = "btn btn-danger";
             }
 
             listTags.Items.Clear();
