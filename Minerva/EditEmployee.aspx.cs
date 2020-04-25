@@ -38,6 +38,7 @@ namespace Minerva
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
                 ClearTextFields();
+                btnSubmitEditEmployee.CssClass = "btn btn-primary";
             }
             else if(RadioButtonListEdit.SelectedValue == "delete")
             {
@@ -45,6 +46,8 @@ namespace Minerva
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
                 ClearTextFields();
+
+                btnSubmitEditEmployee.CssClass = "btn btn-danger";
             }
             else
             {
@@ -52,6 +55,7 @@ namespace Minerva
                 labelUserExists.Text = "";
                 labelFoundUser.Text = "";
                 ClearTextFields();
+                btnSubmitEditEmployee.CssClass = "btn btn-success";
             }
             //User Search Button will always be visible so that you can confirm a UserID does or deos not exist
             labelFirstName.Visible = showForm;
@@ -182,6 +186,10 @@ namespace Minerva
                     cnn.Close();
                 }
                 System.IO.Directory.CreateDirectory("C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\" + firstName+" "+lastName);
+                System.IO.Directory.CreateDirectory("C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\" + firstName + " " + lastName+"\\First Assignment");
+                System.IO.File.Copy("C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\Scott Sabelhaus\\Senior Design 2019\\Assignment0.docx",
+                    "C:\\Users\\shaus\\OneDrive\\Documents\\Senior Design 2019\\VSCode\\Minerva\\Minerva\\" + firstName + " " + lastName+ "\\First Assignment\\Assignment0.docx");
+
 
             }
             if (RadioButtonListEdit.SelectedValue == "edit")

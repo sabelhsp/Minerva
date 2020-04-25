@@ -14,19 +14,19 @@
         <a href="EditEmployee.aspx">
             <div class="col-lg-4">
                 <h2>Add/Remove Employee</h2>
-                <asp:Image ImageUrl="~/images/NewHire.png" runat="server" />
+                <asp:Image ImageUrl="~/images/NewHire.png" Height="200px" runat="server" />
             </div>
         </a>
         <a href="EditLearning.aspx">
             <div class="col-lg-4">
                 <h2>Add Learning/Objectives</h2>
-                <asp:Image ImageUrl="~/images/Learning.jpg" runat="server" />
+                <asp:Image ImageUrl="~/images/Learning.jpg" Height="200px" runat="server" />
             </div>
         </a>
         <a href="EditWiki.aspx">
             <div class="col-lg-4">
                 <h2>Edit Company Wiki</h2>
-                <asp:Image ImageUrl="~/images/Wiki.jpg" runat="server" />
+                <asp:Image ImageUrl="~/images/Wiki.jpg" Height="200px" runat="server" />
             </div>
         </a>
     </div>
