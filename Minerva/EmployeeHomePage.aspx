@@ -14,19 +14,19 @@
         <a href="EmployeeDrive.aspx">
         <div class="col-lg-4">
             <h2>View Files - Your Drive</h2>
-            <asp:Image ImageUrl="~/images/File.png" runat="server"/>
+            <asp:Image ImageUrl="~/images/File.png" Height="200px" runat="server"/>
         </div>
         </a>
         <a href="ViewLearning.aspx">
         <div class="col-lg-4">
             <h2>View Learning/Objectives</h2>
-            <asp:Image ImageUrl="~/images/Learning.jpg" runat="server"/>
+            <asp:Image ImageUrl="~/images/Learning.jpg" Height="200px" runat="server"/>
         </div>
         </a>
         <a href="ViewWiki.aspx">
         <div class="col-lg-4">
             <h2>Search Company Wiki</h2>
-            <asp:Image ImageUrl="~/images/Wiki.jpg" runat="server"/>
+            <asp:Image ImageUrl="~/images/Wiki.jpg" Height="200px" runat="server"/>
         </div>
         </a>
     </div>

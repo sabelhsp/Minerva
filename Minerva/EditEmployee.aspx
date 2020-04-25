@@ -20,7 +20,7 @@
     <div class="form-group col-lg-12">
         <asp:Label ID="labelUserId" runat="server" Text="User ID:"></asp:Label>
         <asp:TextBox ID="textBoxUserId" runat="server" CssClass="form-control"></asp:TextBox>
-        <asp:Button ID="btnUserIdSearch" runat="server" Text="Search" OnClick="btnUserIdSearch_Click" />
+        <asp:Button ID="btnUserIdSearch" runat="server" Text="Search" OnClick="btnUserIdSearch_Click" CssClass="btn btn-primary" />
         <asp:Label ID="labelFoundUser" runat="server"></asp:Label><br />
         <asp:Label ID="labelFirstName" runat="server" Text="First Name:"></asp:Label>
         <asp:TextBox ID="textBoxFirstName" runat="server" CssClass="form-control"></asp:TextBox>
@@ -40,7 +40,7 @@
         <asp:TextBox ID="textBoxAddress" runat="server" CssClass="form-control"></asp:TextBox>
         <asp:Label ID="labelAdminRights" runat="server" Text="Admin Privileges?"></asp:Label>
         <asp:CheckBox ID="checkBoxAdmin" runat="server" Text="Yes" /><br />
-        <asp:Button ID="btnSubmitEditEmployee" runat="server" Text="Submit" OnClick="btnSubmitEditEmployee_Click" />
+        <asp:Button ID="btnSubmitEditEmployee" runat="server" Text="Submit" OnClick="btnSubmitEditEmployee_Click" CssClass="btn btn-success" />
         <asp:Label ID="labelUserExists" runat="server"></asp:Label>
     </div>
 </asp:Content>

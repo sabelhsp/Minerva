@@ -12,9 +12,9 @@
     <h1>View Your Learning Assignments</h1>
     <h3 class ="container">Assigned Learning</h3><br />
     <div class ="container">
-    <asp:GridView ID="gridAssigned" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered">
+    <asp:GridView ID="gridAssigned" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered" >
         <Columns>
-            <asp:HyperLinkField DataTextField="CourseName" DataNavigateUrlFields="CourseLink" HeaderText="Name"  />
+            <asp:HyperLinkField DataTextField="CourseName" DataNavigateUrlFields="CourseLink" HeaderText="Name" />
             <asp:BoundField DataField="CourseDesc" HeaderText="Description" />
             <asp:BoundField DataField="CourseDuration" HeaderText="Duration" />
             <asp:BoundField DataField="DateDue" HeaderText="Date Due" />
@@ -29,7 +29,7 @@
             <asp:BoundField DataField="CourseName" HeaderText="Name" />
             <asp:BoundField DataField="CourseDesc" HeaderText="Description" />
             <asp:BoundField DataField="CourseDuration" HeaderText="Duration" />
-            <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned" />
+            <asp:BoundField DataField="DateAssigned" HeaderText="Date Assigned"  />
         </Columns>
 
     </asp:GridView>
